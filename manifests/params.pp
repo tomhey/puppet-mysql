@@ -41,6 +41,10 @@ class mysql::params {
     default => true,
   }
 
+  $service_provider = $::operatingsystem ? {
+    default => 'init',
+  }
+
   $process = $::operatingsystem ? {
     default => 'mysqld',
   }

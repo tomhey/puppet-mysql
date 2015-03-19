@@ -157,6 +157,9 @@
 # [*service_status*]
 #   If the mysql service init script supports status argument
 #
+# [*service_provider*]
+#   The puppet mysql service provider (i.e. init, service, ...)
+#
 # [*process*]
 #   The name of mysql process
 #
@@ -251,6 +254,7 @@ class mysql (
   $package             = params_lookup( 'package' ),
   $service             = params_lookup( 'service' ),
   $service_status      = params_lookup( 'service_status' ),
+  $service_provider    = params_lookup( 'service_provider' ),
   $process             = params_lookup( 'process' ),
   $process_args        = params_lookup( 'process_args' ),
   $process_user        = params_lookup( 'process_user' ),
@@ -403,6 +407,7 @@ class mysql (
       name      => $mysql::service,
       enable    => $mysql::manage_service_enable,
       hasstatus => $mysql::service_status,
+      provider  => $mysql::service_provider,
       pattern   => $mysql::process,
       require   => [ Package['mysql'] , File['mysql.conf'] ]
     }
